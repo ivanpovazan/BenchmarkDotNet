@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using BenchmarkDotNet.Characteristics;
@@ -59,7 +60,11 @@ namespace BenchmarkDotNet.Toolchains
         private ExecuteResult Execute(Process process, BenchmarkCase benchmarkCase, SynchronousProcessOutputLoggerWithDiagnoser loggerWithDiagnoser,
             ILogger logger, ConsoleExitHandler consoleExitHandler, int launchIndex)
         {
-            logger.WriteLineInfo($"// Execute: {process.StartInfo.FileName} {process.StartInfo.Arguments} in {process.StartInfo.WorkingDirectory}");
+            logger.WriteLineInfo($"// Execute: {process.StartInfo.FileName} {process.StartInfo.Arguments} in {process.StartInfo.WorkingDirectory} with environment: ");
+            foreach (DictionaryEntry envVar in process.StartInfo.EnvironmentVariables)
+            {
+                logger.WriteLineInfo($"// name: {envVar.Key} value: {envVar.Value}");
+            }
 
             process.Start();
 

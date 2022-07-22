@@ -12,9 +12,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Runtime.MonoAOTCompiler.Task" version="6.0.0-*" GeneratePathProperty="true" />
-  </ItemGroup>
+  <!-- <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Runtime.MonoAOTCompiler.Task" version="7.0.0-dev" GeneratePathProperty="true" />
+  </ItemGroup> -->
 
   <ItemGroup>
     <Compile Include="$CODEFILENAME$" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
@@ -34,7 +34,7 @@
     <Message Text="Packaged ID: %(RuntimePack.PackageDirectory)" Importance="high" />
   </Target>
 
-  <UsingTask TaskName="MonoAOTCompiler" AssemblyFile="$(PkgMicrosoft_NET_Runtime_MonoAOTCompiler_Task)/MonoAOTCompiler.dll" /> 
+  <UsingTask TaskName="MonoAOTCompiler" AssemblyFile="/Users/ivan/repos/runtime-mono-AOT/artifacts/bin/MonoAOTCompiler/Release/net7.0/MonoAOTCompiler.dll" /> 
 
   <Target Name="AotApp" AfterTargets="Build" DependsOnTargets="Publish">
 
@@ -51,10 +51,9 @@
      </AotInputAssemblies>
    </ItemGroup>
 
-
    <MonoAOTCompiler
         CompilerBinaryPath="$COMPILERBINARYPATH$"
-        Mode="Normal"
+        Mode="Full"
         OutputType="Library"
         LibraryFormat="$(SharedLibraryType)"
         Assemblies="@(AotInputAssemblies)"
