@@ -143,7 +143,7 @@ namespace BenchmarkDotNet.Extensions
 
                 if (aotruntime.AOTCompilerMode == MonoAotCompilerMode.llvm)
                 {
-                    start.EnvironmentVariables["MONO_ENV_OPTIONS"] = "--full-aot";
+                    start.EnvironmentVariables["MONO_ENV_OPTIONS"] = "--full-aot-interp";
                 }
             }
 

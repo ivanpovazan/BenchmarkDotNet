@@ -53,7 +53,7 @@
 
    <MonoAOTCompiler
         CompilerBinaryPath="$COMPILERBINARYPATH$"
-        Mode="Full"
+        Mode="FullInterp"
         OutputType="Library"
         LibraryFormat="$(SharedLibraryType)"
         Assemblies="@(AotInputAssemblies)"
